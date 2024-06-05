@@ -72,6 +72,7 @@ $(function () {
     createCannon("top", 500, 2000);
     createCannon("right", 500, 2500);
     createCannon("right", 400, 2000);
+    createCannon("right", 770, 150);
     createCannon("bottom", 300, 1000);
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
