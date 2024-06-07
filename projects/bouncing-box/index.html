@@ -8,7 +8,7 @@
       .box {
         width: 70px;
         height: 70px;
-        background-color: teal;
+        background-color: rgb(203, 96, 245);
         font-size: 300%;
         text-align: center;
         user-select: none;
@@ -91,6 +91,7 @@
           if (positionY < 0) {
             speedY = speedY * -1;
           }
+          
         }
 
         /* 
@@ -102,14 +103,18 @@
           positionX = 0;
           positionY = 0;
           points = points + 1;
-          speed = speed + 3;
           if (speed > 0) {
             +3;
           }
           if (speed < 0) {
             -3;
           }
-          speedY = speedY + 3;
+         if (speedY > 0) {
+            +3;
+          }
+          if (speedY < 0) {
+            -3;
+          }
           changeBoxText(points);
         }
       })();
