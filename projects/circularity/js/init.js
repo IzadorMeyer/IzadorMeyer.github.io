@@ -23,19 +23,17 @@ var init = function (window) {
     function drawCircle() {
       // Code to draw a circle
       circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);
-      physikz.addRandomVelocity(circle, canvas, 70, 70);
+      physikz.addRandomVelocity(circle, canvas, 30, 30);
       view.addChild(circle);
       circles.push(circle);
     }
 
     // TODO 3 / 7 : Call the drawCircle() function
-    var loopsCompleted = 0
-    while (loopsCompleted < 500) {
-        drawCircle()
-        loopsCompleted++
+    var loopsCompleted = 0;
+    while (loopsCompleted < 300) {
+      drawCircle();
+      loopsCompleted++;
     }
-
-
 
     ////////////////////////////////////////////////////////////
     ///////////////// PROGRAM LOGIC ////////////////////////////
@@ -48,14 +46,16 @@ var init = function (window) {
         */
     function update() {
       // TODO 4 : Update the circle's position //
-     for(var circlesMoving = 0; circlesMoving < circles.length; circlesMoving++){
-      physikz.updatePosition(circles[circlesMoving])
-      game.checkCirclePosition(circles[circlesMoving])
-     }
-    
-      // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
-      
+      for (
+        var circlesMoving = 0;
+        circlesMoving < circles.length;
+        circlesMoving++
+      ) {
+        physikz.updatePosition(circles[circlesMoving]);
+        game.checkCirclePosition(circles[circlesMoving]);
+      }
 
+      // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
 
       // TODO 9 : Iterate over the array
     }
@@ -73,14 +73,14 @@ var init = function (window) {
 
       // TODO 6 : YOUR CODE STARTS HERE //////////////////////
       if (circle.x < 0) {
-        circle.x = canvas.width
+        circle.x = canvas.width;
       }
-      
+
       if (circle.y > canvas.height) {
-        circle.y = 0
+        circle.y = 0;
       }
       if (circle.y < 0) {
-        circle.y = canvas.height
+        circle.y = canvas.height;
       }
       // YOUR TODO 6 CODE ENDS HERE //////////////////////////
     };
