@@ -241,8 +241,9 @@ function hasCollidedWithSnake() {
         return true;
       }
     }
-  } return false;
-}  
+  }
+  return false;
+}
 
 function endGame() {
   // stop update function from running
@@ -359,6 +360,13 @@ function getRandomAvailablePosition() {
     not occupied by a snakeSquare in the snake's body. If it is then set 
     spaceIsAvailable to false so that a new position is generated.
     */
+   for(var i = 0; i < snake.body.length; i++){
+    if(randomPosition.row === snake.body[i].row){
+      if(randomPosition.column === snake.body[i].column){
+        spaceIsAvailable = false
+      }
+    }
+   }
   }
 
   return randomPosition;
