@@ -20,7 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-
+applyFilter(reddify)
   
 
   // do not change the below line of code
@@ -32,8 +32,20 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2 & 4: Create the applyFilter function here
-
-
+function applyFilter(filterFunction){
+for(var a = 0; a < image.length; a++){
+  for(var b = 0; b < image[a].length; b++){
+    var rgbString = image[a][b]
+    var rgbNumbers = rgbStringToArray(rgbString)
+    filterFunction(rgbNumbers)
+    rgbString = rgbArrayToString(rgbNumbers)
+    image[a][b] = rgbString
+  }
+}
+}
+function reddify(pixelSet){
+pixelSet[RED] = 200
+}
 // TODO 7: Create the applyFilterNoBackground function
 
 
