@@ -28,6 +28,8 @@ function runProgram() {
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL); // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on("keydown", handleKeyDown); // change 'eventType' to the type of event you want to handle
+  $(document).on("keyup", handleKeyUp)
+
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -37,9 +39,13 @@ function runProgram() {
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
-  function newFrame() {}
-  repositionGameItem()
-  redrawGameItem()
+  function newFrame() {
+    repositionGameItem()
+    wallCollision()
+    redrawGameItem()
+    
+  }
+  
   /* 
   Called in response to events.
   */
@@ -50,8 +56,20 @@ function runProgram() {
       walker.speedX = 5;
     } else if (event.which === KEY.UP) {
       walker.speedY = -5;
-    } else if (event.which === KEY.LEFT) {
+    } else if (event.which === KEY.DOWN) {
       walker.speedY = 5;
+    }
+  }
+
+  function handleKeyUp(event){
+    if (event.which === KEY.LEFT) {
+      walker.speedX = 0;
+    } else if (event.which === KEY.RIGHT) {
+      walker.speedX = 0;
+    } else if (event.which === KEY.UP) {
+      walker.speedY = 0;
+    } else if (event.which === KEY.DOWN) {
+      walker.speedY = 0;
     }
   }
 
@@ -73,5 +91,16 @@ function runProgram() {
   function redrawGameItem() {
     $("#walker").css("left", walker.positionX);
     $("#walker").css("top", walker.positionY);
+  }
+  function wallCollision(){
+    if(walker.positionX > $("#board").width){
+      walker.positionX -= walker.speedX
+    }else if(walker.positionX < 0){
+      walker.positionX += walker.speedX
+    }else if(walker.positionY > $("#board").height()){
+      walker.positionY -= walker.speedY
+    }else if(walker.positionY < 0){
+      walker.positionY += walker.speedY
+    }
   }
 }
