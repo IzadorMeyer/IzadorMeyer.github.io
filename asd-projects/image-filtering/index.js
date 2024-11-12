@@ -43,6 +43,7 @@ for(var a = 0; a < image.length; a++){
   }
 }
 }
+// make image more red
 function reddify(pixelSet){
 pixelSet[RED] = 200
 }
@@ -50,7 +51,11 @@ pixelSet[RED] = 200
 
 
 // TODO 5: Create the keepInBounds function
-
+function keepInBounds(colorValue){
+return colorValue < 0 ? 0 
+: colorValue > 255 ? 255
+: colorValue
+}
 
 // TODO 3: Create reddify function
 
