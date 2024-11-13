@@ -93,11 +93,11 @@ function runProgram() {
     $("#walker").css("top", walker.positionY);
   }
   function wallCollision(){
-    if(walker.positionX >= $("#board").width()){
+    if(walker.positionX >= $("#board").width() - 40){
       walker.positionX -= walker.speedX
     }else if(walker.positionX <= 0){
       walker.positionX -= walker.speedX
-    }else if(walker.positionY >= $("#board").height()){
+    }else if(walker.positionY >= $("#board").height() - 40){
       walker.positionY -= walker.speedY
     }else if(walker.positionY <= 0){
       walker.positionY -= walker.speedY
