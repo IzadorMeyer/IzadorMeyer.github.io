@@ -20,9 +20,11 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-applyFilter(reddify)
-applyFilter(decreaseBlue) 
-applyFilter(increaseGreenByBlue) 
+ applySmudge(smudge)
+applyFilterNoBackground(reddify)
+applyFilterNoBackground(decreaseBlue) 
+applyFilterNoBackground(increaseGreenByBlue) 
+
 
   // do not change the below line of code
   render($("#display"), image);
@@ -48,13 +50,17 @@ for(var a = 0; a < image.length; a++){
 
 // TODO 7: Create the applyFilterNoBackground function
 function applyFilterNoBackground(filterFunction){
+  var backgroundColor = "rgb(150, 150, 150)"
   for(var a = 0; a < image.length; a++){
     for(var b = 0; b < image[a].length; b++){
       var rgbString = image[a][b]
-      var rgbNumbers = rgbStringToArray(rgbString)
-      filterFunction(rgbNumbers)
-      rgbString = rgbArrayToString(rgbNumbers)
-      image[a][b] = rgbString
+      if(image[a][b] !== backgroundColor){
+        var rgbNumbers = rgbStringToArray(rgbString)
+        filterFunction(rgbNumbers)
+        rgbString = rgbArrayToString(rgbNumbers)
+        image[a][b] = rgbString
+      }
+      
     }
   }
   }
@@ -83,3 +89,25 @@ function increaseGreenByBlue(pixelSet){
 }
 
 // CHALLENGE code goes below here
+function applySmudge(filterFunction){
+  for(var a = 0; a < image.length; a++){
+    for(var b = 0; b < image[a].length; b++){
+      var rgbString1 = image[a][b]
+      var rgbString2 = image[a++][b++]
+      var rgbNumbers1 = rgbStringToArray(rgbString1)
+      var rgbNumbers2 = rgbStringToArray(rgbString2)
+      filterFunction(rgbNumbers1, rgbNumbers2)
+      rgbString1 = rgbArrayToString(rgbNumbers1)
+      rgbString2 = rgbArrayToString(rgbNumbers2)
+      image[a][b] = rgbString1
+      image[a++][b++] = rgbString2
+    }
+  }
+}
+
+
+function smudge(pixel, nextPixel){
+pixel[RED] = nextPixel[RED]
+pixel[GREEN] = nextPixel[GREEN]
+pixel[BLUE] = nextPixel[BLUE]
+}
