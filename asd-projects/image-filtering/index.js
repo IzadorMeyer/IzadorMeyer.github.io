@@ -20,7 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
- applySmudge(smudge)
+applySmudge(smudge)
 applyFilterNoBackground(reddify)
 applyFilterNoBackground(decreaseBlue) 
 applyFilterNoBackground(increaseGreenByBlue) 
@@ -93,14 +93,14 @@ function applySmudge(filterFunction){
   for(var a = 0; a < image.length; a++){
     for(var b = 0; b < image[a].length; b++){
       var rgbString1 = image[a][b]
-      var rgbString2 = image[a++][b++]
+      var rgbString2 = image[a + 1][b + 1]
       var rgbNumbers1 = rgbStringToArray(rgbString1)
       var rgbNumbers2 = rgbStringToArray(rgbString2)
       filterFunction(rgbNumbers1, rgbNumbers2)
       rgbString1 = rgbArrayToString(rgbNumbers1)
       rgbString2 = rgbArrayToString(rgbNumbers2)
       image[a][b] = rgbString1
-      image[a++][b++] = rgbString2
+      image[a + 1][b + 1] = rgbString2
     }
   }
 }
