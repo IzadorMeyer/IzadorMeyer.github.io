@@ -91,8 +91,8 @@ function increaseGreenByBlue(pixelSet){
 // CHALLENGE code goes below here
 function applySmudge(filterFunction){
   for(var a = 0; a < image.length; a++){
-    for(var b = 0; b < image[a]; b++){
-      if(image[a + 1] < image.length && image[b + 1] < image.length){
+    for(var b = 0; b < image[a].length; b++){
+      if(a + 1 < image.length && b + 1 < image[a].length){
         var rgbString1 = image[a][b]
         var rgbString2 = image[a + 1][b + 1]
         var rgbNumbers1 = rgbStringToArray(rgbString1)
