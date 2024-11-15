@@ -20,11 +20,11 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-applySmudge(smudge)
+
 applyFilterNoBackground(reddify)
 applyFilterNoBackground(decreaseBlue) 
 applyFilterNoBackground(increaseGreenByBlue) 
-
+applySmudge(smudge)
 
   // do not change the below line of code
   render($("#display"), image);
