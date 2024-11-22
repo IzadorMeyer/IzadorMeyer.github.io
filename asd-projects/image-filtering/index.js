@@ -110,7 +110,8 @@ function applySmudge(filterFunction){
 
 
 function smudge(pixel, nextPixel){
-pixel[RED] = nextPixel[RED]
-pixel[GREEN] = nextPixel[GREEN]
-
+pixel[RED] += nextPixel[RED]
+pixel[GREEN] += nextPixel[GREEN]
+pixel[BLUE] += nextPixel[BLUE]
 }
+
