@@ -39,6 +39,15 @@ _.identity = function (value) {
  *   _.indexOf(["a","b","c"], "d") -> -1
  */
 
+_.indexOf = function (array, value) {
+  for (var i = 0; i < array.length; i++) {
+    if (value === array[i]) {
+      return i;
+    }
+  }
+  return -1;
+};
+
 /** _.contains
  * Arguments:
  *   1) An array
@@ -52,6 +61,8 @@ _.identity = function (value) {
  * Examples:
  *   _.contains([1,"two", 3.14], "two") -> true
  */
+
+_.contains = function (array, value) {};
 
 /** _.each
  * Arguments:
