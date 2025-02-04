@@ -62,7 +62,14 @@ _.indexOf = function (array, value) {
  *   _.contains([1,"two", 3.14], "two") -> true
  */
 
-_.contains = function (array, value) {};
+_.contains = function (array, value) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return true;
+    }
+  }
+  return false;
+};
 
 /** _.each
  * Arguments:
@@ -76,6 +83,12 @@ _.contains = function (array, value) {};
  *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
  *      -> should log "a" "b" "c" to the console
  */
+
+_.each = function (collect, func) {
+  for (var i = 0; i < collect.length; i++) {
+    func(collect[i], i, collect);
+  }
+};
 
 /** _.filter
  * Arguments:
@@ -93,6 +106,16 @@ _.contains = function (array, value) {};
  *   use _.each in your implementation
  */
 
+_.filter = function (array, func) {
+  var truth = [];
+  for (var i = 0; i < array.length; i++) {
+    if (func(array[i], i, array) === true) {
+      truth.push(array[i]);
+    }
+  }
+  return truth;
+};
+
 /** _.reject
  * Arguments:
  *   1) An array
@@ -105,6 +128,16 @@ _.contains = function (array, value) {};
  * Examples:
  *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
  */
+
+_.reject = function (array, func) {
+  var lies = [];
+  for (var i = 0; i < array.length; i++) {
+    if (func(array[i], i, array) !== true) {
+      lies.push(array[i]);
+    }
+  }
+  return lies;
+};
 
 /** _.map
  * Arguments:
@@ -119,6 +152,14 @@ _.contains = function (array, value) {};
  * Examples:
  *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
  */
+
+_.map = function (collect, func) {
+  var value = [];
+  for (var i = 0; i < collect.length; i++) {
+    value.push(func(collect[i], i, collect));
+  }
+  return value;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
