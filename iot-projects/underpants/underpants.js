@@ -45,12 +45,14 @@ _.identity = function (value) {
  */
 
 _.typeOf = function (value) {
-  if (value === null) {
-    return "null";
-  } else if (value === undefined) {
+  if (value === undefined) {
     return "undefined";
-  } else if (value !== NaN) {
+  } else if (value === null) {
+    return "null";
+  } else if (value === Number) {
     return "number";
+  } else if (Array.isArray(value) === true) {
+    return "array";
   }
 };
 
