@@ -40,8 +40,8 @@
   // set initial properties for the ball
   ball.x = canvas.width / 2;
   ball.y = canvas.height / 2;
-  ball.xVelocity = 5;
-  ball.yVelocity = 5;
+  ball.xVelocity = 2;
+  ball.yVelocity = -5;
 
   // add the paddles and the ball to the view
   stage.addChild(paddlePlayer, paddleCPU, ball);
@@ -73,7 +73,7 @@
     const boundsPlayer = paddlePlayer.getBounds();
     const widthPlayer = paddlePlayer.width;
     const heightPlayer = paddlePlayer.height;
-
+    console.log(paddleCPU);
     // Ball movement: the xVelocity and yVelocity is the distance the ball moves per update
     ball.x = ball.x + ball.xVelocity;
     ball.y = ball.y + ball.yVelocity;
@@ -88,21 +88,39 @@
     }
 
     // AI movement: CPU follows ball //
-    if ((paddleCPU.y + midCPU) < (ball.y - 14)) {
+
+    //checks if paddleCPU is below the ball
+    if (paddleCPU.y + midCPU < ball.y - 14) {
+      //moves paddleCPU up
       paddleCPU.y += paddleCPU.yVelocity;
-    } else if ((paddleCPU.y + midCPU) > (ball.y + 14)) {
+      // checks if paddleCPU is above the ball
+    } else if (paddleCPU.y + midCPU > ball.y + 14) {
+      // moves paddleCPU down
       paddleCPU.y -= paddleCPU.yVelocity;
     }
 
     // TODO 1: bounce the ball off the top
-
-
+    if (ball.y < 0) {
+      ball.yVelocity = ball.yVelocity * -1;
+    }
     // TODO 2: bounce the ball off the bottom
-
-
+    if (ball.y > canvas.height) {
+      ball.yVelocity = ball.yVelocity * -1;
+    }
     // TODO 3: bounce the ball off each of the paddles
+    //bouncing off cpu
+    if (ball.y > paddleCPU.y && ball.y < paddleCPU.y + heightCPU) {
+      if (ball.x > paddleCPU.x && ball.x < paddleCPU.x + widthCPU) {
+        ball.xVelocity = ball.xVelocity * -1;
+      }
+    }
 
-
+    //bouncing off player
+    if (ball.y > paddlePlayer.y && ball.y < paddlePlayer.y + heightPlayer) {
+      if (ball.x > paddlePlayer.x && ball.x < paddlePlayer.x + widthPlayer) {
+        ball.xVelocity = ball.xVelocity * -1;
+      }
+    }
   }
 
   // helper function that wraps the draw.rect function for easy paddle making
