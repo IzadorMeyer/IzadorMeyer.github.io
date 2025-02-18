@@ -35,12 +35,12 @@
 
   // set initial properties for the paddles
   paddlePlayer.yVelocity = 0;
-  paddleCPU.yVelocity = 6;
+  paddleCPU.yVelocity = 5;
 
   // set initial properties for the ball
   ball.x = canvas.width / 2;
   ball.y = canvas.height / 2;
-  ball.xVelocity = 2;
+  ball.xVelocity = 5;
   ball.yVelocity = -5;
 
   // add the paddles and the ball to the view
@@ -112,6 +112,7 @@
     if (ball.y > paddleCPU.y && ball.y < paddleCPU.y + heightCPU) {
       if (ball.x > paddleCPU.x && ball.x < paddleCPU.x + widthCPU) {
         ball.xVelocity = ball.xVelocity * -1;
+        createjs.SoundJS.play("hit");
       }
     }
 
@@ -119,7 +120,19 @@
     if (ball.y > paddlePlayer.y && ball.y < paddlePlayer.y + heightPlayer) {
       if (ball.x > paddlePlayer.x && ball.x < paddlePlayer.x + widthPlayer) {
         ball.xVelocity = ball.xVelocity * -1;
+        createjs.SoundJS.play("hit");
       }
+    }
+
+    // ball goes out of bounds
+
+    if (ball.x > canvas.width) {
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+    }
+    if (ball.x < 0) {
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
     }
   }
 
