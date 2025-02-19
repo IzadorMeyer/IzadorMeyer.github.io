@@ -5,6 +5,7 @@ const port = 8686;
 
 http
   .createServer(async function (req, res) {
+    console.log(args);
     res.writeHead(200, { "Content-Type": "text/html" });
     var url = args[0] ? args[0] : "https://izadormeyer.github.io";
     var fetchResponse = await fetch(url);
