@@ -102,17 +102,19 @@
     // TODO 1: bounce the ball off the top
     if (ball.y < 0) {
       ball.yVelocity = ball.yVelocity * -1;
+      createjs.Sound.play("wall");
     }
     // TODO 2: bounce the ball off the bottom
     if (ball.y > canvas.height) {
       ball.yVelocity = ball.yVelocity * -1;
+      createjs.Sound.play("wall");
     }
     // TODO 3: bounce the ball off each of the paddles
     //bouncing off cpu
     if (ball.y > paddleCPU.y && ball.y < paddleCPU.y + heightCPU) {
       if (ball.x > paddleCPU.x && ball.x < paddleCPU.x + widthCPU) {
         ball.xVelocity = ball.xVelocity * -1;
-        createjs.SoundJS.play("hit");
+        createjs.Sound.play("hit");
       }
     }
 
@@ -120,7 +122,7 @@
     if (ball.y > paddlePlayer.y && ball.y < paddlePlayer.y + heightPlayer) {
       if (ball.x > paddlePlayer.x && ball.x < paddlePlayer.x + widthPlayer) {
         ball.xVelocity = ball.xVelocity * -1;
-        createjs.SoundJS.play("hit");
+        createjs.Sound.play("hit");
       }
     }
 
