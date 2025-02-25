@@ -14,7 +14,7 @@ http
     let startTime = d.getTime();
 
     // TODO 12: Make the whole thing parallel
-    async.parallel(
+    async.series(
       // TODO 9: Supply an array of functions
       [
         function (callback) {
@@ -41,9 +41,10 @@ http
         let endTime = d.getTime();
         let duration = endTime - startTime;
         res.write("Race Duration: " + duration + "ms\n");
-        res.end();
+        res.end()
       }
     );
+    
   })
   .listen(port);
 
