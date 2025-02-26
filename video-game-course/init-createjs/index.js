@@ -17,6 +17,7 @@
   // INIT CREATEJS //
 
   const container = new createjs.Container();
+  const circleContainer = new createjs.Container();
 
   // CREATE A BACKGROUND //
   const background = new createjs.Shape();
@@ -28,13 +29,20 @@
 
   circle.graphics.beginFill("blue").drawCircle(0, 0, 40);
 
+  const circle2 = new createjs.Shape();
+
+  circle2.graphics.beginFill("blue").drawCircle(80, 0, 40);
+
+
   container.x = canvas.width * 0.5;
 
   const rect = new createjs.Shape();
-  rect.graphics.beginFill("red").drawRect(-50, 50, 120, 10);
+  rect.graphics.beginFill("red").drawRect(-10, 50, 120, 10);
+  
 
   // ADD DISPLAY OBJECTS TO STAGE //
-  container.addChild(circle, rect);
+  circleContainer.addChild(circle, circle2)
+  container.addChild(circleContainer, rect);
   stage.addChild(background, container);
 
   stage.update();
@@ -49,16 +57,32 @@
    * TODO 10: Implement an update Function, after making
    * changes to assets, it must call stage.update();
    */
-  const maxScale = 5;
-  let scaleSpeed = 0.005;
+  const maxScale = 1.25;
+  const minScale = 0.25;
+  let scaleSpeed = 0.05;
+  let containerSpeed
 
   function update(event) {
-    //circle.x++;
-    //container.y++;
-    if (circle.scaleX === maxScale) {
-      circle.scaleX += scaleSpeed;
+    
+    if(container.y >= canvas.height - 60){
+      containerSpeed = -3;
     }
 
+    if(container.y <= 0){
+      containerSpeed = 3
+    }
+
+    container.y += containerSpeed
+    
+   if(circleContainer.scaleY <= minScale){
+    scaleSpeed = 0.03
+   }
+   if(circleContainer.scaleY >= maxScale){
+    scaleSpeed = -0.03
+   }
+    circleContainer.scaleY += scaleSpeed
+   console.log(scaleSpeed)
+   console.log(circleContainer.scaleY)
     stage.update();
   }
 })(window, window.createjs);
