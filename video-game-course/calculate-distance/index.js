@@ -1,5 +1,5 @@
 // TODO 4: Add a parameter for your gaming library in the index.js module:
-(function(window, createjs, opspark) {
+(function(window, createjs, opspark, gameLibrary) {
   // OUR MODULE CODE GOES BELOW HERE //
 
   console.log('index.js initialized!');
@@ -20,7 +20,8 @@
   const engine = opspark.V6().activateResize();
   const canvas = engine.getCanvas();
   const stage = engine.getStage();
-    
+
+  const getDistance = gameLibrary.numz.getDistance
     
   const radius = 25; // the radius of our two circles
   const shapeUp = new createjs.Shape(); // the up state: the mouse is NOT intersecting
@@ -55,20 +56,29 @@
      * TODO 5: use getDistance to calculate the distance between shapeUp and 
      * the mouse. Store the result in a variable called distance:
      */
+    const mouse =
+     {x : stage.mouseX,
+      y : stage.mouseY
+    }
     
+    const distance = getDistance(shapeUp, mouse)
     
-    
+    console.log(stage)
     /*
      * TODO 6: Check if the mouse is within the area of shapeUp, and set the 
      * alpha property of shapeUp accordingly:
      */
-    
+      /*if(distance < 25){
+        shapeUp.alpha = 0
+      }else shapeUp.alpha = 1 */
+
+      distance < 25 ? shapeUp.alpha = 0 : shapeUp.alpha = 1
     
     /*
      * Update the textfield with the current distance between the mouse and 
      *the edge of the shapeUp
      */
-    updateText(textfield, `Distance: ${Math.round(distance)}px`);
+     updateText(textfield, `Distance: ${Math.round(distance)}px`);
   }
   
   
@@ -82,12 +92,14 @@
     textfield.y = canvas.height / 2 + 50;
   }
 
+  /*
   function getDistance(pointA, pointB) {
     const distanceX = pointB.x - pointA.x;
     const distanceY = pointB.y - pointA.y;
     const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
     return distance;
   }
+  */
 
   // startup the engine (the tick) //
   engine
@@ -97,4 +109,4 @@
   // OUR MODULE CODE GOES ABOVE HERE //
   
 // TODO 3: Pass your gaming library into the index.js module:
-}(window, window.createjs, window.opspark));
+}(window, window.createjs, window.opspark, window.gameLibrary));
