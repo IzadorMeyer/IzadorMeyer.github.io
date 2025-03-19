@@ -18,12 +18,12 @@ function generateTemperature(){
   if(temperature < 0){
     temperature = 0
     nextChange = 0
-  } else if(tempature > 100){
-    tempature = 100
+  } else if(temperature > 100){
+    temperature = 100
     nextChange = 0
     
   }
-  console.log(tempature)
+  
  }
 
  setInterval(generateTemperature, 1000);
@@ -40,7 +40,12 @@ const server = http.createServer(function (req, res) {
   /* DO NOT EDIT THIS CODE */
 
   //TODO 2: Regular Polling Server
- 
+ if(req.method === "GET"){
+  res.writeHead(200, {"content-Type": "application/json"})
+
+  res.end(JSON.stringify({value: temperature}))
+
+ }
 });
 
 //TODO 7: WebSocket Server
