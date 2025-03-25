@@ -49,7 +49,13 @@ const server = http.createServer(function (req, res) {
 });
 
 //TODO 7: WebSocket Server
+const wss = new WebSocket.Server({port: 8080 });
 
+wss.on('connection', setInterval(function(socket){
+  if(socket.readyState === WebSocket.OPEN){
+    socket.send(JSON.stringify({value: temperature}))
+  }
+},1000))
 
 /* DO NOT EDIT THIS CODE */
 server.listen(port);

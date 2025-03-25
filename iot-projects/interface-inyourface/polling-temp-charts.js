@@ -54,20 +54,20 @@ $(document).ready(function () {
     json = {
       highest: 0,
       lowest: 100,
-      highID: "#json-highest",
-      lowID: "#json-lowset",
+      highID: "json-highest",
+      lowID: "json-lowest",
     }
     ajax = {
       highest: 0,
       lowest: 100,
-      highID: "#ajax-highest",
-      lowID: "#ajax-lowset",
+      highID: "ajax-highest",
+      lowID: "ajax-lowsest",
     }
     ws = {
       highest: 0,
       lowest: 100,
-      highID: "#ws-highest",
-      lowID: "#ws-lowset",
+      highID: "ws-highest",
+      lowID: "ws-lowest",
     }
 
     $("#json-chart-container").append(
@@ -126,16 +126,36 @@ $(document).ready(function () {
       $.getJSON("http://localhost:8080/", function (result) {
         // Callback code will go here in the next steps
         addDataPoint(result, jsonData, jsonChart)
-        addDataPoint(result, ajaxData, ajaxChart)
-        addDataPoint(result, wsData, wsChart)
+        updateJSONRecords(result.value)
       });
     }
 
     setInterval(doJSONPoll, 5000)
+
     // TODO 6: AJAX Polling
+    function doAJAXPoll(){
+      $.getJSON("http://localhost:8080/", function (result) {
+        // Callback code will go here in the next steps
+        addDataPoint(result, ajaxData, ajaxChart)
+        updateAJAXRecords(result.value)
+      });
+    }
+
+    setInterval(doAJAXPoll, 5000)
 
     // TODO 7: WebSocket Polling
-
+    var socket = new WebSocket("ws://localhost:8080/pi/sensors/dht/temperature");
+    socket.onmessage = function (event) {
+      // Code for handling temperature data will go here
+      var result = JSON.parse(event.data);
+      addDataPoint(result, wsData, wsChart);
+      updateWSRecords(result.value)
+    };
+    
+    socket.onerror = function (error) {
+      // Code for handling errors will go here
+      console.error("WebSocket error:", error);
+    };
     // Do not work below this line
     function getTime() {
       var d = new Date();
