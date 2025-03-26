@@ -9,6 +9,7 @@ const port = 8080;
 var temperature = 72
 var nextChange = 0
 
+
 function generateTemperature(){
   let changeDiffrence = Math.random() - 0.5
 
