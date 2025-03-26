@@ -61,7 +61,7 @@ $(document).ready(function () {
       highest: 0,
       lowest: 100,
       highID: "ajax-highest",
-      lowID: "ajax-lowsest",
+      lowID: "ajax-lowest",
     }
     ws = {
       highest: 0,
