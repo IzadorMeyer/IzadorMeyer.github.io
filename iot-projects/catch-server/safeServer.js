@@ -17,7 +17,6 @@ const server = http.createServer(function(req, res){
             
             req.on('end', function(){
                 serverStatus = {}
-                console.log(JSON.parse(body))
                 serverStatus = JSON.parse(body)
             })
             res.writeHead(200, {"content-Type": "text/plain"})
