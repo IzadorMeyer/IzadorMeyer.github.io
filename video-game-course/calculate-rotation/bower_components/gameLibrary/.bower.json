@@ -1,0 +1,28 @@
+{
+  "name": "gameLibrary",
+  "main": "index.js",
+  "homepage": "https://github.com/IzadorMeyer/gameLibrary",
+  "authors": [
+    "isadormeyer <izadormeyer@gmail.com>"
+  ],
+  "description": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.2.0",
+  "_release": "1.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.0",
+    "commit": "a829537bec68e11f8024b7f00e230e401283e0fc"
+  },
+  "_source": "https://github.com/IzadorMeyer/gameLibrary.git",
+  "_target": "^1.2.0",
+  "_originalSource": "https://github.com/IzadorMeyer/gameLibrary.git",
+  "_direct": true
+}

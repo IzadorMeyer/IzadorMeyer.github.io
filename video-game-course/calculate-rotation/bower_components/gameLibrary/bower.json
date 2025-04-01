@@ -1,0 +1,17 @@
+{
+  "name": "gameLibrary",
+  "main": "index.js",
+  "homepage": "https://github.com/IzadorMeyer/gameLibrary",
+  "authors": [
+    "isadormeyer <izadormeyer@gmail.com>"
+  ],
+  "description": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
