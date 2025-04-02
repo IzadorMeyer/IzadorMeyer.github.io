@@ -14,14 +14,12 @@
   // try a different hex color if you want //
   const ship = assets.makeShip('#4286f4');
   
-  
   // TODO 5: Center the ship on the stage //
-  ship.x = 50
-  ship.y = 120
-console.log(ship)
-console.log(canvas)
+  ship.x = canvas.width / 2
+  ship.y = canvas.height / 2
+
   // TODO 6: Add the ship to the stage //
-  
+   stage.addChild(ship)
 
   
   function update(event) {
@@ -36,18 +34,24 @@ console.log(canvas)
      * method takes two points. What do you need to do to translate
      * these values such that they're packed into a point?
      */
-    
+    const getAngleDegrees = gameLibrary.numz.getAngleDegrees
+
+    mouse = {
+      x : stage.mouseX,
+      y : stage.mouseY
+    }
+    const degrees = getAngleDegrees(ship, mouse)
     
     // TODO 8: Set the ship's rotation property to the degrees //
     
-    
+    ship.rotation = degrees
     
     /*
      * TODO 9: Uncomment the line below to update the textfield  
      * with the current angle degrees. Degrees will be a value 
      * between π and -π, or, 180 and -180.
      */
-    // assets.updateText(textfield, `Degrees: ${degrees.toFixed(3)}°`, canvas);
+     assets.updateText(textfield, `Degrees: ${degrees.toFixed(3)}°`, canvas);
   }
 
   engine
