@@ -74,6 +74,21 @@ _.typeOf = function (value) {
  *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
  */
 
+_.first = function(array, number){
+  if(Array.isArray(array) !== true || number < 0){
+    return []
+  }else if(number === NaN || number === undefined){
+    return array[0]
+  }else if(number > array.length){
+    return array
+  }else
+  var holder = []
+   for(var i = 0; i < number; i++){
+    holder.push(array[i])
+  }
+  return holder
+}
+
 /** _.last
  * Arguments:
  *   1) An array
@@ -91,6 +106,20 @@ _.typeOf = function (value) {
  *   _.last(["a", "b", "c"], 1) -> "c"
  *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
  */
+_.last = function(array, number){
+  if(Array.isArray(array) !== true || number < 0){
+    return []
+  }else if(number === NaN || number === undefined){
+    return array[array.length - 1]
+  }else if(number > array.length){
+    return array
+  }else
+  var holder = []
+   for(var i = array.length - number; i < array.length; i++){
+    holder.push(array[i])
+  }
+  return holder
+}
 
 /** _.indexOf
  * Arguments:
@@ -158,9 +187,14 @@ _.contains = function (array, value) {
  */
 
 _.each = function (collect, func) {
-  for (var i = 0; i < collect.length; i++) {
-    func(collect[i], i, collect);
+  if(Array.isArray(collect)){
+    for (var i = 0; i < collect.length; i++) {
+      func(collect[i], i, collect);
+    }
+  }else for(var i = 0; i <= Object.keys(collect).length; i++){
+    func(collect.i, i, collect)
   }
+ 
 };
 
 /** _.unique
