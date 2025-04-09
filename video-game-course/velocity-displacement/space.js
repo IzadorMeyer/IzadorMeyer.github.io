@@ -1,5 +1,5 @@
 // TODO 5.d: Replace *my-game-lib* with the name of your game lib
-(function(window, createjs, opspark, gameLibrary) {
+(function(window, opspark, gameLibrary) {
   // holds all bodies active in our space //
   const active = [];
 
@@ -21,10 +21,10 @@
          * TODO 8: use your gaming lib to 
          * update the position of the body
          */
-        ship.update()
+        body.update()
         gameLibrary.phyz.updatePosition(body)
       });
     }
   };
 // TODO 5.c: Replace *my-game-lib* with the name of your game lib
-}(window, window.createjs, window.opspark, window.gameLibrary));
+}(window, window.opspark, window.gameLibrary));

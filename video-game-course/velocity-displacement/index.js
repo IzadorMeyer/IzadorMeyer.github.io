@@ -1,5 +1,5 @@
 // TODO 4: Change *my-game-lib* to the name of your game lib
-(function(window, opspark, gameLibrary) {
+(function(window, createjs, opspark, gameLibrary) {
   const
     engine = opspark.V6().activateResize(),
     canvas = engine.getCanvas(),
@@ -9,6 +9,7 @@
 
   const ship = assets.makeShip('#4286f4');
 
+  
   /*
    * The space module expects each body to implement an
    * update() method. On each tick, the space module loops
@@ -77,7 +78,9 @@
   // listen for user releasing keys //
   document.onkeyup = function(event) {
     // TODO 13: How do we stop the application of forces?
-    
+    console.log(ship)
+    ship.propulsion = 0
+    ship.rotationalVelocity = 0
   };
   
   function reboundCircularAssetInArea(body, area) {
@@ -93,10 +96,11 @@
       // we've struck the right side of the area //
       body.x = right - radius;
       body.velocityX *= -1;
-    } else if ( /* TODO 9: Check if body's hit left side */ false ) {
+    } else if (body.x - radius < left ) {
       // we've struck the left side of the area //
       // TODO 10: Code the reaction to hitting the left side
-      
+      body.x = left + radius
+      body.velocityX *= -1
     }
 
     // check for hit on top or bottom //
@@ -104,12 +108,13 @@
       // we've struck the right side of the area //
       body.y = top + radius;
       body.velocityY *= -1;
-    } else if ( /* TODO 11: Check if body's hit bottom */ false ) {
+    } else if ( body.y + radius > bottom ) {
       // we've struck the bottom of the area //
       // TODO 12: Code the reaction to hitting the bottom
-      
+      body.y = bottom - radius
+      body.velocityY *= -1
     }
   }
   
   // TODO 3: replace *my-game-lib* with the name of your game lib //
-}(window, window.opspark, window.gameLibrary));
+}(window, window.createjs, window.opspark, window.gameLibrary));
