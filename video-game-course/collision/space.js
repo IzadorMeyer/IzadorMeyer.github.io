@@ -1,4 +1,4 @@
-(function(window, opspark, racket) {
+(function(window, opspark, racket, gameLibrary) {
   /**
    * Creates and returns the space module. Listens for SPAWN 
    * events, adding any bodies in the event
@@ -49,28 +49,33 @@
             const bodyB = active[j];
             
             // TODO 1: Calculate hit test components
-            
-            
+            var distanceX = bodyB.x- bodyA.x
+            var distanceY = bodyB.y - bodyA.y
+            var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY)
+            var minimunDistance = bodyB.radius + bodyA.radius
               
             // TODO 2: Do collision check: how do we know if bodies are colliding?
-            if(/* replace with collision check */ false) {
-              // console.log('hit!');
+            if(distance <= minimunDistance) {
+               console.log('hit!');
               
               // TODO 3: Calculate springToX and springToY 
-              
+              var angle = Math.atan2(distanceY, distanceX)
+             var springToY = Math.cos(angle) * minimunDistance + bodyA.x
+             var springToX = Math.sin(angle) * minimunDistance + bodyA.y
               
                 
               // TODO 4: Calculate acceleration to spring-to point, factor in dampeningForce
-              
+              var accerationOnX = springToX - bodyB.x * dampeningForce
+              var accerationOnY = springToY - bodyB.y * dampeningForce
               
               
               // TODO 5: Apply acceleration to bodyB
-              
-              
+               bodyB.velocityX += accerationOnX
+               bodyB.velocityY += accerationOnY
               
               // TODO 6: Apply inverse acceleration to bodyA
-              
-              
+              bodyA.velocityX -= accerationOnX
+              bodyA.velocityY -= accerationOnY
               
             }
           }
@@ -78,4 +83,4 @@
       }
     };
   };
-}(window, window.opspark, window.opspark.racket));
+}(window, window.opspark, window.opspark.racket, window.gameLibrary));
