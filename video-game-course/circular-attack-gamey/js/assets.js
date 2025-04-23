@@ -72,7 +72,7 @@
           return projectile;
         },
         makeShip(color) {
-          const
+          /*const
             radius = 25,
             ship = draw.rect(radius, radius, color, null, null, -(radius + radius / 10), -(radius / 2));
 
@@ -80,7 +80,14 @@
           draw.circle(radius + 3, color, null, null, null, null, ship);
           draw.circle(radius, '#CCC', null, null, null, null, ship);
           draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
-          draw.circle(radius - 15, '#CCC', null, null, -5, null, ship);
+          draw.circle(radius - 15, '#CCC', null, null, -5, null, ship); */
+
+          const radius = 20
+          const ship = draw.polyStar(radius, 6, 0, 0, '#13a84c', null, null, null, null,)
+          draw.circle(radius - 5, '#ffffff', null, null, null, null, ship)
+          draw.polyStar(radius - 10, 3, 0, 0, '#1cc75d', null, null, 5, null, ship)
+          draw.rect(radius - 5, radius - 10, '#1cc75d', null, null, - 12, -5, ship)
+          
 
           // reset the radius, other non-radii drawing operations have overwritten it //
           ship.radius = radius + 3;
@@ -147,6 +154,13 @@
           // orb.cache(-rad, -rad, rad * 2, rad * 2);
           
           return orb;
+        },
+        makeSplitShot(){
+          const radius = 20
+          const ship = draw.polyStar(radius, 6, 0, 0, '#ffa500', null, null, null, null,)
+          draw.circle(radius - 5, '#ffffff', null, null, null, null, ship)
+          draw.circle(radius - 15, '#ffa500', null, null, -5, -5, ship)
+          draw.circle(radius - 15, '#ffa500', null, null, 5, 5, ship)
         },
         centerOnStage,
       };
