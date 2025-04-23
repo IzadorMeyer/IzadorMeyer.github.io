@@ -49,7 +49,7 @@
             const bodyB = active[j];
             
             // TODO 1: Calculate hit test components
-            var distanceX = bodyB.x- bodyA.x
+            var distanceX = bodyB.x - bodyA.x
             var distanceY = bodyB.y - bodyA.y
             var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY)
             var minimunDistance = bodyB.radius + bodyA.radius
@@ -60,13 +60,13 @@
               
               // TODO 3: Calculate springToX and springToY 
               var angle = Math.atan2(distanceY, distanceX)
-             var springToY = Math.cos(angle) * minimunDistance + bodyA.x
-             var springToX = Math.sin(angle) * minimunDistance + bodyA.y
+             var springToX = Math.cos(angle) * minimunDistance + bodyA.x
+             var springToY = Math.sin(angle) * minimunDistance + bodyA.y
               
                 
               // TODO 4: Calculate acceleration to spring-to point, factor in dampeningForce
-              var accerationOnX = springToX - bodyB.x * dampeningForce
-              var accerationOnY = springToY - bodyB.y * dampeningForce
+              var accerationOnX = (springToX - bodyB.x) * dampeningForce
+              var accerationOnY = (springToY - bodyB.y) * dampeningForce
               
               
               // TODO 5: Apply acceleration to bodyB
