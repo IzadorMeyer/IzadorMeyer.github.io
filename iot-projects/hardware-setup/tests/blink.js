@@ -1,11 +1,12 @@
 const onoff = require("onoff");
 
 const g = onoff.Gpio;
-const l1 = new g(16, "out");
-const l2 = new g(21, "out");
+const l1 = new g(528,  "out");
+const l2 = new g(533, "out");
 let i;
+let t;
 
-i = setInterval(function () {
+t = setInterval(function () {
   const value = (l1.readSync() + 1) % 2;
   l1.write(value, function () {
     console.log(`Changed LED 1 state to: ${value}`);
@@ -15,7 +16,18 @@ i = setInterval(function () {
   });
 }, 1000);
 
+i = setInterval(function () {
+  const value = (l1.readSync() + 2) % 2;
+  l1.write(value, function () {
+    console.log(`Changed LED 1 state to: ${value}`);
+    l2.write((value + 2) % 2, function () {
+      console.log(`Changed LED 2 state to: ${(value + 2) % 2}`);
+    });
+  });
+}, 1500);
+
 process.on("SIGINT", function () {
+  clearInterval(t)
   clearInterval(i);
   off(l1);
   off(l2);
