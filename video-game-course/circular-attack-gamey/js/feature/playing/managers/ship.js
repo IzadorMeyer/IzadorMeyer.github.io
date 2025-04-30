@@ -42,7 +42,8 @@
         fire = _.throttle(player => projectile.fire(player), value, { 'trailing': false });
       }
       
-      function handleCollisionShip(impact) {
+      function handleCollisionShip(impact, body) {
+        console.log(body)
         if (this.integrity > 0) {
           this.integrity -= impact;
           messenger.dispatch({ type: 'DAMAGE', source: 'ship', target: this });

@@ -49,6 +49,11 @@
         phyz.reboundCircularAssetInArea(this, canvas);
       }
 
+      function updatePowerup(event) {
+        phyz.updateVelocity(this, 0, 0);
+        phyz.reboundCircularAssetInArea(this, canvas);
+      }
+
       function updateProjectile(impact) {
         phyz.reboundCircularAssetInArea(this, canvas);
       }
@@ -72,7 +77,7 @@
           return projectile;
         },
         makeShip(color) {
-          /*const
+          const
             radius = 25,
             ship = draw.rect(radius, radius, color, null, null, -(radius + radius / 10), -(radius / 2));
 
@@ -80,19 +85,13 @@
           draw.circle(radius + 3, color, null, null, null, null, ship);
           draw.circle(radius, '#CCC', null, null, null, null, ship);
           draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
-          draw.circle(radius - 15, '#CCC', null, null, -5, null, ship); */
+          draw.circle(radius - 15, '#CCC', null, null, -5, null, ship); 
 
-          const radius = 20
-          const ship = draw.polyStar(radius, 6, 0, 0, '#13a84c', null, null, null, null,)
-          draw.circle(radius - 5, '#ffffff', null, null, null, null, ship)
-          draw.polyStar(radius - 10, 3, 0, 0, '#1cc75d', null, null, 5, null, ship)
-          draw.rect(radius - 5, radius - 10, '#1cc75d', null, null, - 12, -5, ship)
-          
 
           // reset the radius, other non-radii drawing operations have overwritten it //
           ship.radius = radius + 3;
           ship.color = color;
-
+          ship.fireType = 'normal'
           // rasterize the vector graphic, basically creating a bitmap //
           ship.snapToPixel = true;
           ship.cache(-radius - 10, -radius - 10, radius * 2 + 15, radius * 2 + 15);
@@ -157,10 +156,28 @@
         },
         makeSplitShot(){
           const radius = 20
-          const ship = draw.polyStar(radius, 6, 0, 0, '#ffa500', null, null, null, null,)
-          draw.circle(radius - 5, '#ffffff', null, null, null, null, ship)
-          draw.circle(radius - 15, '#ffa500', null, null, -5, -5, ship)
-          draw.circle(radius - 15, '#ffa500', null, null, 5, 5, ship)
+          const splitShot = draw.polyStar(radius, 6, 0, 0, '#ffa500', null, null, null, null,)
+          draw.circle(radius - 5, '#ffffff', null, null, null, null, splitShot)
+          draw.circle(radius - 15, '#ffa500', null, null, -5, -5, splitShot)
+          draw.circle(radius - 15, '#ffa500', null, null, 5, 5, splitShot)
+
+          Object.assign(splitShot, phyz.makeBody('splitShot', { 
+            density: splitShot.radius / 20 * 0.5,
+            volatility: splitShot.radius * 0.0001,
+          }));
+          phyz.addRandomVelocity(splitShot, canvas);
+          splitShot.update = updatePowerup;
+
+          return splitShot
+        },
+        makeSpeedBoost(){
+          const radius = 20
+          const speedBoost = draw.polyStar(radius, 6, 0, 0, '#13a84c', null, null, null, null,)
+          draw.circle(radius - 5, '#ffffff', null, null, null, null, speedBoost)
+          draw.polyStar(radius - 10, 3, 0, 0, '#1cc75d', null, null, 5, null, speedBoost)
+          draw.rect(radius - 5, radius - 10, '#1cc75d', null, null, - 12, -5, speedBoost)
+
+          return speedBoost
         },
         centerOnStage,
       };

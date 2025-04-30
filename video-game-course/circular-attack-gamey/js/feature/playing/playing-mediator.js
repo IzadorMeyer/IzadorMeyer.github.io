@@ -35,8 +35,13 @@
           .setKeyMap({ UP: controls.KEYS.W, LEFT: controls.KEYS.A, RIGHT: controls.KEYS.D, FIRE: controls.KEYS.SHIFT_LEFT })
           .spawn('#f44242'),
           
+          powerup = opspark.playa.powerup(assets, fx, messenger)
+          .spawn(5)
+
         orb = opspark.playa.orb(assets, fx, messenger)
           .spawn(25);
+
+        
       
       game.view.addChild(view.container);
       
