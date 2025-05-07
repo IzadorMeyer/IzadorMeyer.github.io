@@ -28,7 +28,7 @@
         _state = 'walking';
         
         player.on('fire', function () {
-            projectileManager.fire(player);
+            projectileManager.fireSplitShot(player);
         });
         activate();
         

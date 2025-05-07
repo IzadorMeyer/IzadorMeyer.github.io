@@ -53,6 +53,11 @@
         phyz.reboundCircularAssetInArea(this, canvas);
       }
 
+      function updateSpeedBoost(event) {
+        phyz.updateVelocity(this, 0, 0);
+        phyz.reboundCircularAssetInArea(this, canvas);
+      }
+
       function updateProjectile(impact) {
         phyz.reboundCircularAssetInArea(this, canvas);
       }
@@ -181,7 +186,7 @@
             volatility: speedBoost.radius * 0.0001,
           }));
           phyz.addRandomVelocity(speedBoost, canvas);
-          speedBoost.update = updatePowerup;
+          speedBoost.update = updateSpeedBoost;
 
           return speedBoost
         },

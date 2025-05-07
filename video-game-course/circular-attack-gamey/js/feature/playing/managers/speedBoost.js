@@ -59,6 +59,7 @@
         }
         
         function handleCollision(impact, body) {
+            console.log(this.type , body.type)
           // don't handle collisions between powerups //
           if (body.type === this.type) return;
   

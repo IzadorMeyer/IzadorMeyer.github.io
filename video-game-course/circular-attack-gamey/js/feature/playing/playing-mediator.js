@@ -1,10 +1,10 @@
-(function(opspark, _) {
+(function (opspark, _) {
   // create a namespace for the playingMediator //
   _.set(opspark, 'playa.playingMediator',
     /**
      * Creates and returns the playing mediator.
      */
-    function(view, game, data) {
+    function (view, game, data) {
       const
         level = data.levels[data.currentLevel],
         canvas = game.canvas,
@@ -15,56 +15,56 @@
         assets = opspark.playa.assets(canvas, fx, level),
         hud = opspark.playa.hud(game, messenger).activate(),
         space = opspark.playa.space(messenger, level),
-        
+
         ship = opspark.playa.ship(
-          assets, 
-          controls, 
-          messenger, 
+          assets,
+          controls,
+          messenger,
           opspark.playa.projectile(fx, assets, messenger),
-          fx.makePlayerEmitter(), 
+          fx.makePlayerEmitter(),
           level)
           .spawn(),
-          
+
         shipTwo = opspark.playa.ship(
-          assets, 
-          controls, 
-          messenger, 
+          assets,
+          controls,
+          messenger,
           opspark.playa.projectile(fx, assets, messenger),
-          fx.makePlayerEmitter(), 
+          fx.makePlayerEmitter(),
           level)
           .setKeyMap({ UP: controls.KEYS.W, LEFT: controls.KEYS.A, RIGHT: controls.KEYS.D, FIRE: controls.KEYS.SHIFT_LEFT })
-          .spawn('#f44242'),
-          
-          powerup = opspark.playa.powerup(assets, fx, messenger)
-          .spawn(5)
+          .spawn('#f44242');
 
-          speedBoost = opspark.playa.speedBoost(assets, fx, messenger)
-          .spawn(5)
+      const powerup = opspark.playa.powerup(assets, fx, messenger)
+        .spawn(1);
 
-        orb = opspark.playa.orb(assets, fx, messenger)
-          .spawn(25);
+      const speedBoost = opspark.playa.speedBoost(assets, fx, messenger)
+        .spawn(1);
 
-        
-      
+      const orb = opspark.playa.orb(assets, fx, messenger)
+        .spawn(1);
+
+
+
       game.view.addChild(view.container);
-      
+
       // event handlers here //
-      
+
       function onExplosion(event) {
-        switch(event.source) {
+        switch (event.source) {
           case 'ship':
             messenger.off('EXPLOSION', onExplosion);
-            setTimeout(() => game.end({message: "GAME OVER"}), 2000);
+            setTimeout(() => game.end({ message: "GAME OVER" }), 2000);
             break;
           case 'orb':
-            if(orb.getNumberActive() < 1) {
+            if (orb.getNumberActive() < 1) {
               messenger.off('EXPLOSION', onExplosion);
-              setTimeout(() => game.end({message: "HOT THING"}), 2000);
+              setTimeout(() => game.end({ message: "HOT THING" }), 2000);
             }
             break;
         }
       }
-      
+
       // handle pause key stroke //
       function onKeyDown(event) {
         if ((event.metaKey || event.ctrlKey) && (String.fromCharCode(event.which).toLowerCase() === 'p')) {
@@ -89,30 +89,30 @@
           return view.liquify();
         },
         enter() {
-          return new Promise(function(resove, reject) {
+          return new Promise(function (resove, reject) {
             game.stage.enableMouseOver(0);
             window.addEventListener('keydown', onKeyDown);
-            
+
             view.open();
-            
+
             controls.activate();
             hud.activate();
 
             game.addUpdateable(fx, ship, shipTwo, space);
-            
+
             // orbManager.on('EXPLOSION', onOrbExplosion);
             messenger.on('EXPLOSION', onExplosion);
-            
+
             resove();
           });
         },
         exit() {
-          return new Promise(function(resove, reject) {
+          return new Promise(function (resove, reject) {
             view.close();
-            
+
             controls.deactivate();
             hud.deactivate();
-            
+
             game.removeUpdateable(space, ship, shipTwo, fx);
             game.stage.enableMouseOver(20);
             resove();
@@ -121,14 +121,14 @@
         destroy() {
           window.removeEventListener('keydown', onKeyDown);
           messenger.clearHandlers();
-          
+
           hud.destroy();
           controls.deactivate();
           viewManager.deactivate();
-          
+
           // orbManager.off('EXPLOSION', onOrbExplosion);
           // playerManager.off('EXPLOSION', onPlayerExplosion);
-          
+
           game.view.removeChild(view.container);
         }
       };
