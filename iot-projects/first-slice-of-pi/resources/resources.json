@@ -16,7 +16,7 @@
 				"name": "Passive Infrared Sensor",
 				"description": "A passive infrared sensor",
 				"value": true,
-				"gpio": 4
+				"gpio": 516
 			},
 			"dht": {
 				"link": "/pi/sensors/dht",
