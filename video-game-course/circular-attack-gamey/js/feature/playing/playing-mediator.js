@@ -38,6 +38,9 @@
           powerup = opspark.playa.powerup(assets, fx, messenger)
           .spawn(5)
 
+          speedBoost = opspark.playa.speedBoost(assets, fx, messenger)
+          .spawn(5)
+
         orb = opspark.playa.orb(assets, fx, messenger)
           .spawn(25);
 

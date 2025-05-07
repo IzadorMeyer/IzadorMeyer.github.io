@@ -48,7 +48,6 @@
         phyz.updateVelocity(this, 0, 0);
         phyz.reboundCircularAssetInArea(this, canvas);
       }
-
       function updatePowerup(event) {
         phyz.updateVelocity(this, 0, 0);
         phyz.reboundCircularAssetInArea(this, canvas);
@@ -176,6 +175,13 @@
           draw.circle(radius - 5, '#ffffff', null, null, null, null, speedBoost)
           draw.polyStar(radius - 10, 3, 0, 0, '#1cc75d', null, null, 5, null, speedBoost)
           draw.rect(radius - 5, radius - 10, '#1cc75d', null, null, - 12, -5, speedBoost)
+
+          Object.assign(speedBoost, phyz.makeBody('speedBoost', { 
+            density: speedBoost.radius / 20 * 0.5,
+            volatility: speedBoost.radius * 0.0001,
+          }));
+          phyz.addRandomVelocity(speedBoost, canvas);
+          speedBoost.update = updatePowerup;
 
           return speedBoost
         },
