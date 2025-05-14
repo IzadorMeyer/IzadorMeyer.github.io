@@ -68,7 +68,7 @@
          * if it has integrity before running check to exlode.
          */
         if (this.integrity > 0) {
-          console.log(impact);
+          //console.log(impact);
           this.integrity -= impact;
           if (this.integrity <= 0) {
             fx

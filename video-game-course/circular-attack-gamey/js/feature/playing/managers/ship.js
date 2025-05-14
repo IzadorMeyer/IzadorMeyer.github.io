@@ -43,7 +43,12 @@
       }
       
       function handleCollisionShip(impact, body) {
-        console.log(body)
+        console.log(body.type)
+        console.log(this.fireType)
+        if(body.type === 'splitShot'){
+          console.log("colide with splitShot")
+          this.fireType = 'splitShot'
+        }
         if (this.integrity > 0) {
           this.integrity -= impact;
           messenger.dispatch({ type: 'DAMAGE', source: 'ship', target: this });
