@@ -42,7 +42,7 @@
         .spawn(1);
 
       const orb = opspark.playa.orb(assets, fx, messenger)
-        .spawn(1);
+        .spawn(50);
 
 
 

@@ -48,6 +48,18 @@
         if(body.type === 'splitShot'){
           console.log("colide with splitShot")
           this.fireType = 'splitShot'
+
+          setTimeout(()=>{
+            this.fireType = 'normal'
+          },5_000)
+
+        }else if(body.type === 'speedBoost'){
+          ship.speed = 0.2
+
+          setTimeout(()=>{
+            ship.speed = 0.075
+          },5_000)
+
         }
         if (this.integrity > 0) {
           this.integrity -= impact;
@@ -87,7 +99,7 @@
           // up arrow can be pressed in combo with other keys //
           if (controls.isActive(keyMap.UP)) {
             emitter.emit(ship.getExhaustPoint());
-            ship.propulsion = 0.1;
+            ship.propulsion = ship.speed;
           } else {
             emitter.stop();
             ship.propulsion = 0;

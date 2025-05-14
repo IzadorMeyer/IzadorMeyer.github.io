@@ -95,6 +95,7 @@
           // reset the radius, other non-radii drawing operations have overwritten it //
           ship.radius = radius + 3;
           ship.color = color;
+          ship.speed = 0.075
           ship.fireType = 'normal'
           // rasterize the vector graphic, basically creating a bitmap //
           ship.snapToPixel = true;
@@ -164,6 +165,7 @@
           draw.circle(radius - 5, '#ffffff', null, null, null, null, splitShot)
           draw.circle(radius - 15, '#ffa500', null, null, -5, -5, splitShot)
           draw.circle(radius - 15, '#ffa500', null, null, 5, 5, splitShot)
+          draw.circle(radius, '#ff000000', null, null, null, null, splitShot);
 
           Object.assign(splitShot, phyz.makeBody('splitShot', { 
             density: splitShot.radius / 20 * 0.5,
@@ -180,6 +182,7 @@
           draw.circle(radius - 5, '#ffffff', null, null, null, null, speedBoost)
           draw.polyStar(radius - 10, 3, 0, 0, '#1cc75d', null, null, 5, null, speedBoost)
           draw.rect(radius - 5, radius - 10, '#1cc75d', null, null, - 12, -5, speedBoost)
+          draw.circle(radius, '#ff000000', null, null, null, null, speedBoost);
 
           Object.assign(speedBoost, phyz.makeBody('speedBoost', { 
             density: speedBoost.radius / 20 * 0.5,
