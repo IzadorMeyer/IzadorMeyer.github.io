@@ -13,12 +13,12 @@ next()
 }
 
 function mid3(req, res, next){
-req.third = "third "
+req.third = "third"
 res.send(req.first + req.second + req.third + req.fourth)
 }
 
 function mid4(req, res, next){
-    req.fourth = "fourth "
+    req.fourth = "fourth"
     next()
 }
 

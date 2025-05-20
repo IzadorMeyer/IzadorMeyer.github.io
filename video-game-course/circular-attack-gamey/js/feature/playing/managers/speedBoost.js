@@ -61,7 +61,24 @@
         function handleCollision(impact, body) {
             console.log(this.type , body.type)
           // don't handle collisions between powerups //
-          if (body.type === this.type) return;
+          if (body.type === this.type){
+            return
+          }else if(body.type === 'ship'){
+            console.log('speedBoost hit ship')
+            fx
+            .makeEmitter(2, 3, "rgba(214, 36, 84, 0.2)", null, [
+              new Proton.RandomDrift(5, 0, .35)
+            ])
+            .emit({ x: this.x, y: this.y }, 0.5);
+          pool.recycle(this);
+          messenger.dispatch({ type: 'EXPLOSION', source: 'speedBoost', target: this, incoming: body });
+
+          setTimeout(()=>{
+            console.log("spawn splitShot")
+            opspark.playa.speedBoost(assets, fx, messenger).spawn(1)
+          },10_000)
+
+          };
   
           /*
            * Because the explosion is async, the speedBoost may exist
