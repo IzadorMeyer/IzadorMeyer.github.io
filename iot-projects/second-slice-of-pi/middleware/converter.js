@@ -32,7 +32,7 @@ module.exports = function () {
 					],
 				};
 
-				res.send(json2html.render(result, render))
+				res.send(json2html.render(req.result, render))
 
 			} else { res.send(req.result); }
 		} else { next() }
